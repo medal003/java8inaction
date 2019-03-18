@@ -75,9 +75,13 @@ public class DateTimeExamples {
         LocalTime time1 = dt1.toLocalTime();
         System.out.println(time1);
 
+        final LocalDate t = LocalDate.now().plusYears(1);//增加一年
+        System.out.println(t);
+
         Instant instant = Instant.ofEpochSecond(44 * 365 * 86400);
         Instant now = Instant.now();
 
+        Period period1 = Period.between(date, date1);
         Duration d1 = Duration.between(LocalTime.of(13, 45, 10), time);
         Duration d2 = Duration.between(instant, now);
         System.out.println(d1.getSeconds());
@@ -88,9 +92,47 @@ public class DateTimeExamples {
 
         JapaneseDate japaneseDate = JapaneseDate.from(date);
         System.out.println(japaneseDate);
+
+
+        //Date与Instant的相互转化
+        Instant instant2  = Instant.now();
+        Date date2 = Date.from(instant2);
+        Instant instant3 = date2.toInstant();
+
+//Date转为LocalDateTime
+        Date date3 = new Date();
+        LocalDateTime localDateTime2 = LocalDateTime.ofInstant(date3.toInstant(), ZoneId.systemDefault());
+
+//LocalDateTime转Date
+        LocalDateTime localDateTime3 = LocalDateTime.now();
+        Instant instant4 = localDateTime3.atZone(ZoneId.systemDefault()).toInstant();
+        Date date4 = Date.from(instant4);
+
+//LocalDate转Date
+//因为LocalDate不包含时间，所以转Date时，会默认转为当天的起始时间，00:00:00
+        LocalDate localDate4 = LocalDate.now();
+        Instant instant5 = localDate4.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
+        Date date5 = Date.from(instant5);
+
+
+
+        //查看当前的时区
+        ZoneId defaultZone = ZoneId.systemDefault();
+        System.out.println(defaultZone); //Asia/Shanghai
+
+        //查看美国纽约当前的时间
+        ZoneId america = ZoneId.of("America/New_York");
+        LocalDateTime shanghaiTime = LocalDateTime.now();
+        LocalDateTime americaDateTime = LocalDateTime.now(america);
+        System.out.println(shanghaiTime); //2016-11-06T15:20:27.996
+        System.out.println(americaDateTime); //2016-11-06T02:20:27.996 ，可以看到美国与北京时间差了13小时
+
+        //带有时区的时间
+        ZonedDateTime americaZoneDateTime = ZonedDateTime.now(america);
+        System.out.println(americaZoneDateTime); //2016-11-06T02:23:44.863-05:00[America/New_York]
     }
 
-    private static void useTemporalAdjuster() {
+    private static void useTemporalAdjuster() {// 日期复杂性的偏移操作
         LocalDate date = LocalDate.of(2014, 3, 18);
         date = date.with(nextOrSame(DayOfWeek.SUNDAY));
         System.out.println(date);
@@ -127,7 +169,7 @@ public class DateTimeExamples {
         }
     }
 
-    private static void useDateFormatter() {
+    private static void useDateFormatter() {  // 自定义格式化日期
         LocalDate date = LocalDate.of(2014, 3, 18);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         DateTimeFormatter italianFormatter = DateTimeFormatter.ofPattern("d. MMMM yyyy", Locale.ITALIAN);

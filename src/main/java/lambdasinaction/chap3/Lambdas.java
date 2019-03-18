@@ -7,6 +7,10 @@ import java.util.List;
 
 public class Lambdas {
 	public static void main(String ...args){
+		// lambda表达式有个限制，那就是只能引用 final 或 final 局部变
+		/*List<Integer> primes = Arrays.asList(new Integer[]{2, 3,5,7});
+		int factor = 2;
+		primes.forEach(element -> { factor++; });*/
 
 		// Simple example
 		Runnable r = () -> System.out.println("Hello!");
