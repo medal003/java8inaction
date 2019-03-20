@@ -16,6 +16,7 @@ public class BestPriceFinderMain {
         execute("combined USD CompletableFuture v3", () -> bestPriceFinder.findPricesInUSD3("myPhone27S"));
     }
 
+    // 生产式的函数式，生成一个list
     private static void execute(String msg, Supplier<List<String>> s) {
         long start = System.nanoTime();
         System.out.println(s.get());

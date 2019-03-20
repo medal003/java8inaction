@@ -16,6 +16,7 @@ public class Partitioning {
         System.out.println("Most caloric dishes by vegetarian: " + mostCaloricPartitionedByVegetarian());
     }
 
+    // 分类，二分类
     private static Map<Boolean, List<Dish>> partitionByVegeterian() {
         return menu.stream().collect(partitioningBy(Dish::isVegetarian));
     }

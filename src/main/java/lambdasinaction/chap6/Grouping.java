@@ -23,6 +23,7 @@ public class Grouping {
         System.out.println("Caloric levels by type: " + caloricLevelsByType());
     }
 
+    //分组
     private static Map<Dish.Type, List<Dish>> groupDishesByType() {
         return menu.stream().collect(groupingBy(Dish::getType));
     }

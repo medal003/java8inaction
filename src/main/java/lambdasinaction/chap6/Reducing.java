@@ -11,7 +11,7 @@ public class Reducing {
         System.out.println("Total calories in menu: " + calculateTotalCaloriesWithoutCollectors());
         System.out.println("Total calories in menu: " + calculateTotalCaloriesUsingSum());
     }
-
+// 求和的三种方式
     private static int calculateTotalCalories() {
         return menu.stream().collect(reducing(0, Dish::getCalories, (Integer i, Integer j) -> i + j));
     }

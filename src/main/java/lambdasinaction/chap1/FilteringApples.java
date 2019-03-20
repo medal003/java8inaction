@@ -63,6 +63,7 @@ public class FilteringApples{
         return apple.getWeight() > 150;
     }
 
+    // 预言式函数接口
     public static List<Apple> filterApples(List<Apple> inventory, Predicate<Apple> p){
         List<Apple> result = new ArrayList<>();
         for(Apple apple : inventory){

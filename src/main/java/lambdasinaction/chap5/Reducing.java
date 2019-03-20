@@ -13,7 +13,13 @@ public class Reducing{
     public static void main(String...args){
 
         List<Integer> numbers = Arrays.asList(3,4,5,1,2);
-        int sum = numbers.stream().reduce(0, (a, b) -> a + b);
+        int sum = numbers.stream().reduce(0, (a, b) -> {
+            System.out.println("a:"+a);
+            System.out.println("b:"+b);
+            System.out.println((a + b));
+
+            return a + b;
+        });
         System.out.println(sum);
 
         int sum2 = numbers.stream().reduce(0, Integer::sum);
